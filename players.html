@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Roster & CSV Import - NNSL Auction Arena</title>
+  <meta name="description" content="Manage tournament players, bulk import/export rosters via CSV, and configure stats and base valuations in INR.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Roster Central</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players" class="active"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="auctioneer.html" class="btn btn-primary btn-sm">
+        <i data-lucide="gavel"></i> Auctioneer Console
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-title-group">
+        <h1>
+          <i data-lucide="users" style="color: var(--accent-cyan);"></i> Player Roster Management
+        </h1>
+        <p class="page-subtitle" id="filtered-players-count">Add players individually or batch upload via CSV spreadsheet.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="btn-download-csv-template" class="btn btn-outline btn-sm">
+          <i data-lucide="download"></i> Download CSV Template
+        </button>
+        <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
+          <i data-lucide="upload"></i> Upload CSV
+          <input type="file" id="csv-import-file" accept=".csv" style="display: none;" />
+        </label>
+        <button id="btn-export-players-csv" class="btn btn-secondary btn-sm">
+          <i data-lucide="file-spreadsheet"></i> Export CSV
+        </button>
+        <button id="btn-add-player" class="btn btn-primary btn-sm">
+          <i data-lucide="plus"></i> Add Player Manually
+        </button>
+      </div>
+    </header>
+
+    <!-- Filter & Search Toolbar -->
+    <section class="filter-toolbar">
+      <div class="filter-group">
+        
+        <div class="search-input-wrap" style="position: relative; display: flex; align-items: center;">
+          <input type="text" id="player-search-input" class="form-control" placeholder="Search by name, ID, category, country..." />
+        </div>
+
+        <select id="filter-position-select" class="form-control" style="width: 150px;">
+          <option value="ALL">All Positions</option>
+          <option value="BATSMAN">Batsman</option>
+          <option value="BOWLER">Bowler</option>
+          <option value="ALL ROUNDER">All Rounder</option>
+          <option value="WICKET KEEPER">Wicket Keeper</option>
+          <option value="GK">Goalkeepers (GK)</option>
+          <option value="DF">Defenders (DF)</option>
+          <option value="MF">Midfielders (MF)</option>
+          <option value="FW">Forwards (FW)</option>
+        </select>
+
+        <select id="filter-status-select" class="form-control" style="width: 150px;">
+          <option value="ALL">All Statuses</option>
+          <option value="AVAILABLE">AVAILABLE</option>
+          <option value="LIVE">LIVE</option>
+          <option value="SOLD">SOLD</option>
+          <option value="UNSOLD">UNSOLD</option>
+        </select>
+
+      </div>
+    </section>
+
+    <!-- Players Grid -->
+    <section class="player-cards-grid" id="players-grid-container">
+      <!-- Injected via JavaScript -->
+    </section>
+
+  </div>
+
+  <!-- Add / Edit Player Modal Dialog -->
+  <div class="modal-backdrop" id="player-form-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="player-modal-title">
+          <i data-lucide="user-plus" style="vertical-align: middle;"></i> Player Details
+        </h3>
+        <button class="modal-close" id="player-modal-close">&times;</button>
+      </div>
+
+      <form id="player-edit-form">
+        <div class="modal-body">
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="form-player-id">Unique Player ID</label>
+              <input type="text" id="form-player-id" class="form-control" placeholder="PL001" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-player-name">Full Name</label>
+              <input type="text" id="form-player-name" class="form-control" placeholder="e.g. John Doe" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="form-player-pos">Role / Position</label>
+              <select id="form-player-pos" class="form-control" required>
+                <option value="BATSMAN">Batsman</option>
+                <option value="BOWLER">Bowler</option>
+                <option value="ALL ROUNDER">All Rounder</option>
+                <option value="WICKET KEEPER">Wicket Keeper</option>
+                <option value="FW">Forward (FW)</option>
+                <option value="MF">Midfielder (MF)</option>
+                <option value="DF">Defender (DF)</option>
+                <option value="GK">Goalkeeper (GK)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-player-base-price">Base Price (₹ INR)</label>
+              <input type="number" id="form-player-base-price" class="form-control" placeholder="20000000" step="100000" required />
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label" for="form-player-club">Club / Category</label>
+              <input type="text" id="form-player-club" class="form-control" placeholder="e.g. Category A" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-player-nat">Nationality / Region</label>
+              <input type="text" id="form-player-nat" class="form-control" placeholder="e.g. Domestic" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-player-age">Age</label>
+              <input type="number" id="form-player-age" class="form-control" placeholder="24" min="15" max="50" />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="player-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="player-modal-save">
+            <i data-lucide="check"></i> Save Player
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initPlayersPage } from './js/pages/players.js';
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('players');
+      initPlayersPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

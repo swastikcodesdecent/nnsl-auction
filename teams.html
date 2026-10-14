@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Franchises & Purses - NNSL Auction Arena</title>
+  <meta name="description" content="Configure franchise clubs, ₹120 Crore budgets, 8-player squad limits, and manage team rosters.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Clubs HQ</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams" class="active"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="live.html" target="_blank" class="btn btn-outline btn-sm">
+        <i data-lucide="tv"></i> Live Arena TV
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-title-group">
+        <h1>
+          <i data-lucide="shield" style="color: var(--accent-purple);"></i> Participating Clubs & Purse Management
+        </h1>
+        <p class="page-subtitle">Configure starting purses, monitor budget utilization, squad rosters, and franchise representatives.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button id="btn-add-team" class="btn btn-primary">
+          <i data-lucide="plus"></i> Register New Club
+        </button>
+      </div>
+    </header>
+
+    <!-- Overview Financial Strip -->
+    <section class="kpi-grid" style="margin-bottom: 2rem;">
+      <div class="kpi-card cyan">
+        <div class="kpi-header">
+          <span>Total Starting Purse</span>
+          <i data-lucide="landmark"></i>
+        </div>
+        <div class="kpi-value" id="total-league-purse">$0</div>
+        <div class="kpi-subtext">Combined tournament franchise cap</div>
+      </div>
+
+      <div class="kpi-card emerald">
+        <div class="kpi-header">
+          <span>Total Spent to Date</span>
+          <i data-lucide="wallet"></i>
+        </div>
+        <div class="kpi-value" id="total-league-spent">$0</div>
+        <div class="kpi-subtext">Committed transfer expenditure</div>
+      </div>
+
+      <div class="kpi-card gold">
+        <div class="kpi-header">
+          <span>Average Squad Size</span>
+          <i data-lucide="users"></i>
+        </div>
+        <div class="kpi-value" id="avg-squad-size">0</div>
+        <div class="kpi-subtext">Players signed per club</div>
+      </div>
+    </section>
+
+    <!-- Teams Cards Grid -->
+    <section class="team-cards-grid" id="teams-grid-container">
+      <!-- Injected via JavaScript -->
+    </section>
+
+  </div>
+
+  <!-- Add / Edit Team Modal -->
+  <div class="modal-backdrop" id="team-form-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="team-modal-title">
+          <i data-lucide="shield" style="vertical-align: middle;"></i> Club Details
+        </h3>
+        <button class="modal-close" id="team-modal-close">&times;</button>
+      </div>
+
+      <form id="team-edit-form">
+        <div class="modal-body">
+          
+          <div style="display: flex; gap: 1.25rem; margin-bottom: 1.25rem; align-items: center;">
+            <img id="form-team-logo-preview" src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=100" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-medium); background: #000;" alt="Logo Preview" />
+            <div style="flex: 1;">
+              <label class="form-label" for="form-team-logo">Logo Image URL</label>
+              <input type="url" id="form-team-logo" class="form-control" placeholder="https://..." required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="form-team-id">Unique Club ID</label>
+              <input type="text" id="form-team-id" class="form-control" placeholder="team_madrid" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-team-name">Club Full Name</label>
+              <input type="text" id="form-team-name" class="form-control" placeholder="Real Madrid CF" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="form-team-short">Short Code</label>
+              <input type="text" id="form-team-short" class="form-control" placeholder="RMA" maxlength="4" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-team-rep">Team Representative</label>
+              <input type="text" id="form-team-rep" class="form-control" placeholder="Florentino Perez" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="form-team-purse">Starting Budget (₹ INR)</label>
+              <input type="number" id="form-team-purse" class="form-control" placeholder="1200000000" value="1200000000" step="5000000" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="form-team-color">Brand Primary Color</label>
+              <input type="color" id="form-team-color" class="form-control" value="#3b82f6" style="height: 42px; padding: 2px;" />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="team-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="check"></i> Save Club
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initTeamsPage } from './js/pages/teams.js';
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('teams');
+      initTeamsPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

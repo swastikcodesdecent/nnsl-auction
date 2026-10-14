@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access & Roles - NNSL Auction Arena</title>
+  <meta name="description" content="Role-based access and permissions for NNSL Auction Arena.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .login-container {
+      max-width: 920px;
+      margin: 3.5rem auto;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 800px) {
+      .login-container {
+        grid-template-columns: 1fr;
+        margin: 1.5rem auto;
+      }
+    }
+
+    .login-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Simple Nav -->
+  <header style="padding: 1rem 2.5rem; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: var(--bg-glass-heavy); backdrop-filter: blur(12px);">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Access Portal</span>
+      </div>
+    </a>
+
+    <a href="live.html" class="btn btn-outline btn-sm">
+      <i data-lucide="tv"></i> Public Live View
+    </a>
+  </header>
+
+  <main class="login-container">
+    
+    <!-- Standard Sign In Form -->
+    <div class="login-box">
+      <h2 style="font-family: var(--font-display); font-size: 1.7rem; text-transform: uppercase; margin-bottom: 0.35rem; color: #fff; display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="lock" style="color: var(--accent-gold);"></i> Sign In
+      </h2>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+        Authenticate with your Firebase email credentials or select a demo role.
+      </p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email Address</label>
+          <input type="email" id="login-email" class="form-control" placeholder="admin@footballauction.pro" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" />
+          <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Leave blank for instant demo validation</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.85rem;">
+          <i data-lucide="log-in"></i> Sign In
+        </button>
+      </form>
+
+      <div style="margin-top: 1.75rem; border-top: 1px solid var(--border-subtle); padding-top: 1.25rem; font-size: 0.82rem; color: var(--text-muted);">
+        Role access is verified cryptographically via Firestore custom claims & security rules on the backend.
+      </div>
+    </div>
+
+    <!-- One-Click Preset Demo Roles -->
+    <div class="login-box">
+      <h2 style="font-family: var(--font-display); font-size: 1.7rem; text-transform: uppercase; margin-bottom: 0.35rem; color: var(--accent-gold); display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="users"></i> Instant Demo Roles
+      </h2>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+        Click below to immediately switch context and test different role permissions:
+      </p>
+
+      <div id="quick-roles-container">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+      <div style="margin-top: 1.25rem; font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-tertiary); padding: 0.95rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+        <strong style="color: #fff; display: flex; align-items: center; gap: 0.35rem; margin-bottom: 0.35rem;">
+          <i data-lucide="shield-check" style="color: var(--accent-emerald);"></i> Permissions Matrix:
+        </strong>
+        • <strong>Super Admin:</strong> Full configuration, CRUD, rules, reversals<br/>
+        • <strong>Auctioneer:</strong> Live control, start, bids, confirm sale<br/>
+        • <strong>Team Rep:</strong> View assigned team squad & purse balance<br/>
+        • <strong>Public:</strong> Read-only live broadcast and results
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initLoginPage } from './js/pages/login.js';
+    import { refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      initLoginPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

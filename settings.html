@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Settings - Football Auction Pro</title>
+  <meta name="description" content="Configure tournament parameters, timers, increments, Firebase credentials, and data utilities.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Configuration</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings" class="active"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="live.html" target="_blank" class="btn btn-outline btn-sm">
+        <i data-lucide="tv"></i> Live Arena TV
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-title-group">
+        <h1>
+          <i data-lucide="settings" style="color: var(--accent-gold);"></i> NNSL Tournament Rules & Cloud Settings
+        </h1>
+        <p class="page-subtitle">Configure bidding rules, countdown parameters, Firebase Cloud Firestore settings, and recovery tools.</p>
+      </div>
+    </header>
+
+    <div class="grid-2">
+      
+      <!-- Tournament Rules Form -->
+      <section class="settings-section-card">
+        <h2><i data-lucide="sliders"></i> Auction Rules & Timing</h2>
+        <p class="settings-desc">Fine-tune the live bidding experience and tournament squad parameters (strict 8 players per club limit).</p>
+
+        <form id="tournament-rules-form">
+          <div class="form-group">
+            <label class="form-label" for="settings-tournament-name">Tournament Title</label>
+            <input type="text" id="settings-tournament-name" class="form-control" required />
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="settings-timer-duration">Timer Duration (Seconds)</label>
+              <input type="number" id="settings-timer-duration" class="form-control" min="10" max="120" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="settings-bid-increment">Default Bid Increment (₹ INR)</label>
+              <input type="number" id="settings-bid-increment" class="form-control" step="500000" min="500000" value="5000000" required />
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="form-group">
+              <label class="form-label" for="settings-min-squad">Min Squad (Strict 8)</label>
+              <input type="number" id="settings-min-squad" class="form-control" min="8" max="8" value="8" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="settings-max-squad">Max Squad (Strict 8)</label>
+              <input type="number" id="settings-max-squad" class="form-control" min="8" max="8" value="8" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="settings-starting-purse">Starting Budget (₹ INR)</label>
+              <input type="number" id="settings-starting-purse" class="form-control" step="10000000" value="1200000000" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+            <i data-lucide="check"></i> Save Tournament Rules
+          </button>
+        </form>
+      </section>
+
+      <!-- Firebase Cloud Infrastructure Config -->
+      <section class="settings-section-card">
+        <h2><i data-lucide="cloud"></i> Firebase Cloud Config</h2>
+        <p class="settings-desc">Optional: Link to your Google Cloud Firebase project for persistent multi-device Cloud Firestore.</p>
+
+        <form id="firebase-config-form">
+          <div class="form-group">
+            <label class="form-label" for="fb-api-key">API Key</label>
+            <input type="text" id="fb-api-key" class="form-control" placeholder="AIzaSy..." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="fb-project-id">Project ID</label>
+            <input type="text" id="fb-project-id" class="form-control" placeholder="my-football-auction" />
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="fb-auth-domain">Auth Domain</label>
+              <input type="text" id="fb-auth-domain" class="form-control" placeholder="project.firebaseapp.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="fb-storage-bucket">Storage Bucket</label>
+              <input type="text" id="fb-storage-bucket" class="form-control" placeholder="project.appspot.com" />
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary">
+              <i data-lucide="cloud-lightning"></i> Save Firebase Config
+            </button>
+            <button type="button" class="btn btn-secondary" id="btn-reset-firebase">
+              <i data-lucide="rotate-ccw"></i> Revert to Local Sync
+            </button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- Data Management & Recovery Tools -->
+    <section class="settings-section-card" style="margin-top: 1.5rem; border-color: rgba(245, 158, 11, 0.3);">
+      <h2 style="color: var(--accent-gold); display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="wrench"></i> Roster Management & Recovery Tools
+      </h2>
+      <p class="settings-desc">
+        Tools to reset auction progress, clear players, or download templates for player CSV import.
+      </p>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="players.html" class="btn btn-primary">
+          <i data-lucide="users"></i> Go to Players & CSV Importer
+        </a>
+
+        <button type="button" id="btn-reset-auction-state" class="btn btn-secondary">
+          <i data-lucide="rotate-ccw"></i> Reset Round 1 (Restore Purses & Re-open Players)
+        </button>
+
+        <button type="button" id="btn-clear-all-players" class="btn btn-outline" style="border-color: var(--accent-crimson); color: var(--accent-crimson);">
+          <i data-lucide="trash-2"></i> Clear All Players (Empty Roster)
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initSettingsPage } from './js/pages/settings.js';
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('settings');
+      initSettingsPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

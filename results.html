@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auction Results & Rosters - NNSL Auction Arena</title>
+  <meta name="description" content="Official NNSL results, franchise rosters (8 players max), top transfer signings, and printable summary report.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @media print {
+      .main-nav, .page-header button, .page-header a, .filter-toolbar, #btn-print-results {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .card {
+        background: #fff !important;
+        border: 1px solid #ccc !important;
+        color: #000 !important;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+      }
+      .data-table th, .data-table td {
+        color: #000 !important;
+        border-color: #ddd !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Official Results</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results" class="active"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="live.html" target="_blank" class="btn btn-outline btn-sm">
+        <i data-lucide="tv"></i> Live Arena TV
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="page-title-group">
+        <h1>
+          <i data-lucide="trophy" style="color: var(--accent-gold);"></i> Auction Results & Squad Rosters
+        </h1>
+        <p class="page-subtitle">Comprehensive official transfer records, team squad composition, and top signings leaderboard.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button id="btn-print-results" class="btn btn-primary">
+          <i data-lucide="printer"></i> Print / Export Report
+        </button>
+      </div>
+    </header>
+
+    <!-- Top Transfers Leaderboard -->
+    <section style="margin-bottom: 2rem;">
+      <h2 style="font-family: var(--font-display); font-size: 1.4rem; text-transform: uppercase; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+        <i data-lucide="award" style="color: var(--accent-gold);"></i> Marquee Top Transfers
+      </h2>
+      <div class="top-transfers-grid" id="top-transfers-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="filter-toolbar">
+      <div class="filter-group">
+        <label style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.35rem;">
+          <i data-lucide="filter"></i> Filter Club:
+        </label>
+        <select id="results-team-filter" class="form-control" style="width: 240px;">
+          <option value="ALL">All Teams</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Team Rosters Section -->
+    <section id="results-rosters-container" style="margin-bottom: 2.5rem;">
+      <!-- Team roster cards injected via JavaScript -->
+    </section>
+
+    <!-- Unsold Players Reserve Pool -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <i data-lucide="rotate-ccw" style="color: var(--accent-crimson);"></i> Unsold Players Reserve Pool
+        </h2>
+        <span class="badge badge-unsold">RESERVE ROUND ELIGIBLE</span>
+      </div>
+      <div id="unsold-pool-container">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initResultsPage } from './js/pages/results.js';
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('results');
+      initResultsPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

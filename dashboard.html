@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Dashboard - NNSL Auction Arena</title>
+  <meta name="description" content="Central command dashboard for NNSL player auction administration and analytics.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Command Center</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard" class="active"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="live.html" target="_blank" class="btn btn-outline btn-sm">
+        <i data-lucide="tv"></i> Open Live Arena TV
+      </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="page-title-group">
+        <h1>
+          <i data-lucide="layout-dashboard" style="color: var(--accent-gold);"></i> Tournament Overview & Analytics
+        </h1>
+        <p class="page-subtitle">Real-time financial telemetry, live auction status, and transactional audit trails.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="live.html" target="_blank" class="btn btn-secondary">
+          <i data-lucide="tv"></i> Open TV Screen
+        </a>
+        <a href="auctioneer.html" class="btn btn-primary">
+          <i data-lucide="gavel"></i> Auctioneer Controls
+        </a>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards Grid -->
+    <section class="kpi-grid">
+      
+      <div class="kpi-card cyan">
+        <div class="kpi-header">
+          <span>Total Players</span>
+          <i data-lucide="users"></i>
+        </div>
+        <div class="kpi-value" id="kpi-total-players">0</div>
+        <div class="kpi-subtext">Registered in tournament roster</div>
+      </div>
+
+      <div class="kpi-card emerald">
+        <div class="kpi-header">
+          <span>Sold Players</span>
+          <i data-lucide="check-circle-2"></i>
+        </div>
+        <div class="kpi-value" id="kpi-sold-players">0</div>
+        <div class="kpi-subtext">Successfully transferred</div>
+      </div>
+
+      <div class="kpi-card crimson">
+        <div class="kpi-header">
+          <span>Unsold Players</span>
+          <i data-lucide="x-circle"></i>
+        </div>
+        <div class="kpi-value" id="kpi-unsold-players">0</div>
+        <div class="kpi-subtext">In reserve pool</div>
+      </div>
+
+      <div class="kpi-card purple">
+        <div class="kpi-header">
+          <span>Available Queue</span>
+          <i data-lucide="user-plus"></i>
+        </div>
+        <div class="kpi-value" id="kpi-available-players">0</div>
+        <div class="kpi-subtext">Awaiting podium call</div>
+      </div>
+
+      <div class="kpi-card gold">
+        <div class="kpi-header">
+          <span>Total Spending</span>
+          <i data-lucide="wallet"></i>
+        </div>
+        <div class="kpi-value" id="kpi-total-spent">$0</div>
+        <div class="kpi-subtext">Cumulative player purchase value</div>
+      </div>
+
+      <div class="kpi-card cyan">
+        <div class="kpi-header">
+          <span>Average Price</span>
+          <i data-lucide="trending-up"></i>
+        </div>
+        <div class="kpi-value" id="kpi-avg-price">$0</div>
+        <div class="kpi-subtext">Per successful signing</div>
+      </div>
+
+    </section>
+
+    <!-- Live Auction Spotlight Card -->
+    <section class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <h2 class="card-title">
+          <i data-lucide="activity" style="color: var(--accent-gold);"></i> Live Podium Status
+        </h2>
+        <span class="badge badge-live">REAL-TIME MONITOR</span>
+      </div>
+      <div id="dashboard-live-card">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Main Dashboard Split: Team Purses & Recent Transfers -->
+    <div class="grid-2" style="margin-bottom: 2rem;">
+      
+      <!-- Teams Purse Leaderboard -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <i data-lucide="shield" style="color: var(--accent-cyan);"></i> Club Purse Balances
+          </h2>
+          <a href="teams.html" class="btn btn-outline btn-sm">
+            <i data-lucide="shield"></i> Manage Clubs
+          </a>
+        </div>
+        
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Club</th>
+                <th>Remaining</th>
+                <th>Spent</th>
+                <th>Squad</th>
+                <th>Utilized</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-teams-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Recent Sold Transfers with Undo Reversal -->
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <i data-lucide="arrow-right-left" style="color: var(--accent-emerald);"></i> Recent Transfers
+          </h2>
+          <a href="results.html" class="btn btn-outline btn-sm">
+            <i data-lucide="trophy"></i> Full Results
+          </a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Pos</th>
+                <th>Buyer</th>
+                <th>Fee</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-sold-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Audit Trail & Recovery Table -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <i data-lucide="file-text" style="color: #94a3b8;"></i> Audit Trail & Transaction Logs
+        </h2>
+        <button id="btn-export-audit-csv" class="btn btn-secondary btn-sm">
+          <i data-lucide="download"></i> Export Audit Trail CSV
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 110px;">Time</th>
+              <th style="width: 190px;">Action</th>
+              <th>Description</th>
+              <th style="width: 140px;">Operator</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard-audit-tbody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initDashboardPage } from './js/pages/dashboard.js';
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('dashboard');
+      initDashboardPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

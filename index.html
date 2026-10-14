@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NNSL 2026 - Official Players Auction Arena</title>
+  <meta name="description" content="Production-ready real-time NNSL player auction management system with broadcast display, continuous purse ribbon, spin wheel selector, ₹120 Cr franchise budgets, and strict 8-player squads.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .hero-banner {
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 3.6rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.08;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(180deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 2.25rem;
+    }
+
+    .gateways-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1240px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .gateway-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .gateway-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-medium);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .gateway-card.highlight {
+      border-color: rgba(245, 158, 11, 0.5);
+      background: linear-gradient(145deg, #161e31 0%, #0d1220 100%);
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.15);
+    }
+
+    .gateway-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.85rem;
+    }
+
+    .gateway-title {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .gateway-text {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.75rem;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">2026 Season</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="live.html" target="_blank" class="btn btn-primary btn-sm">
+        <i data-lucide="tv"></i> Launch Live Stadium TV
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-banner">
+    <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.35rem 0.95rem; border-radius: var(--radius-full); margin-bottom: 1.35rem;">
+      <span style="width: 8px; height: 8px; background: var(--accent-gold); border-radius: 50%; box-shadow: 0 0 8px var(--accent-gold);"></span>
+      <span style="font-size: 0.8rem; font-weight: 800; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.08em;">NNSL 2026 Edition • Broadcast-Ready Architecture</span>
+    </div>
+
+    <h1 class="hero-title">NNSL 2026 Players Auction Arena</h1>
+    <p class="hero-desc">
+      A sports broadcast-grade live auction platform featuring televised stadium graphics, dynamic circular halo avatars, continuous franchise purse ticker ribbon, spin wheel player lottery, ₹120 Crore franchise budgets, and strict 8-player squad limits.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="live.html" target="_blank" class="btn btn-primary btn-lg">
+        <i data-lucide="tv"></i> Launch Live Broadcast TV
+      </a>
+      <a href="auctioneer.html" class="btn btn-secondary btn-lg">
+        <i data-lucide="gavel"></i> Auctioneer Touch Console
+      </a>
+      <a href="players.html" class="btn btn-outline btn-lg">
+        <i data-lucide="upload"></i> Import Players (CSV)
+      </a>
+    </div>
+  </header>
+
+  <!-- Gateways Section -->
+  <main class="gateways-grid">
+
+    <!-- Card 1: Live Broadcast Screen -->
+    <div class="gateway-card highlight">
+      <div>
+        <span class="gateway-badge" style="color: var(--accent-gold);">
+          <i data-lucide="tv"></i> Optimized for Projectors & TVs
+        </span>
+        <h2 class="gateway-title">
+          <i data-lucide="tv" style="color: var(--accent-gold);"></i> Live Broadcast Arena
+        </h2>
+        <p class="gateway-text">
+          Televised stadium background with circular orange halo avatar, stacked capsule pills, huge green bid displays, leading franchise card, continuous purse ribbon ticker, and professional SOLD / UNSOLD celebration overlays.
+        </p>
+      </div>
+      <a href="live.html" target="_blank" class="btn btn-primary">
+        Open Stadium Arena <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Card 2: Auctioneer Touch Panel -->
+    <div class="gateway-card">
+      <div>
+        <span class="gateway-badge" style="color: var(--accent-cyan);">
+          <i data-lucide="disc"></i> Mobile & Tablet Touchpad
+        </span>
+        <h2 class="gateway-title">
+          <i data-lucide="gavel" style="color: var(--accent-cyan);"></i> Auctioneer Console & Wheel
+        </h2>
+        <p class="gateway-text">
+          Touch controls for rapid bidding in INR (+₹20L, +₹50L, +₹1Cr, +₹2Cr), interactive <strong>Player Spin Wheel</strong> with realistic physics deceleration, and double-confirmation sale decisions.
+        </p>
+      </div>
+      <a href="auctioneer.html" class="btn btn-secondary">
+        Enter Auctioneer Room <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Card 3: Player Management with CSV -->
+    <div class="gateway-card">
+      <div>
+        <span class="gateway-badge" style="color: #38bdf8;">
+          <i data-lucide="file-spreadsheet"></i> Roster Intelligence
+        </span>
+        <h2 class="gateway-title">
+          <i data-lucide="users" style="color: #38bdf8;"></i> Players & CSV Upload
+        </h2>
+        <p class="gateway-text">
+          Download pre-formatted CSV templates, batch upload tournament rosters in seconds in INR valuations, and manage player statuses without requiring photo uploads.
+        </p>
+      </div>
+      <a href="players.html" class="btn btn-secondary">
+        Upload Players via CSV <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Card 4: Club & Purse Management -->
+    <div class="gateway-card">
+      <div>
+        <span class="gateway-badge" style="color: var(--accent-purple);">
+          <i data-lucide="shield"></i> Franchise Operations
+        </span>
+        <h2 class="gateway-title">
+          <i data-lucide="shield-check" style="color: var(--accent-purple);"></i> Franchise & Purse HQ
+        </h2>
+        <p class="gateway-text">
+          Configure NNSL franchise clubs, starting budgets of ₹120 Crore each, strict 8-player squad limits, and monitor real-time purse progress bars as deals are struck.
+        </p>
+      </div>
+      <a href="teams.html" class="btn btn-secondary">
+        Manage Clubs <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Card 5: Admin Command Dashboard -->
+    <div class="gateway-card">
+      <div>
+        <span class="gateway-badge" style="color: var(--accent-emerald);">
+          <i data-lucide="activity"></i> Central Telemetry
+        </span>
+        <h2 class="gateway-title">
+          <i data-lucide="layout-dashboard" style="color: var(--accent-emerald);"></i> Admin Dashboard
+        </h2>
+        <p class="gateway-text">
+          Live financial telemetry in INR, tournament KPI metrics, club purse balances, transaction rollback tools, and detailed CSV-exportable audit records.
+        </p>
+      </div>
+      <a href="dashboard.html" class="btn btn-secondary">
+        Open Dashboard <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Card 6: Results & Analytics -->
+    <div class="gateway-card">
+      <div>
+        <span class="gateway-badge" style="color: #4ade80;">
+          <i data-lucide="trophy"></i> Press & Review
+        </span>
+        <h2 class="gateway-title">
+          <i data-lucide="award" style="color: #4ade80;"></i> Results & Squad Rosters
+        </h2>
+        <p class="gateway-text">
+          Top marquee transfers leaderboard in INR, franchise squad composition tables with transfer fees (8 players max), unsold player pool, and printable PDF reports.
+        </p>
+      </div>
+      <a href="results.html" class="btn btn-secondary">
+        View Official Results <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 2.25rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.88rem;">
+    NNSL &copy; 2026. Built with Vanilla JavaScript, HTML5, CSS3, Cloud Firestore & Firebase Cloud Functions.
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Navigation Setup -->
+  <script type="module">
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('index');
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

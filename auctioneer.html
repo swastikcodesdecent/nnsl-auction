@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auctioneer Control Room - Football Auction Pro</title>
+  <meta name="description" content="Dedicated mobile-friendly touch console for live football auctioneers.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/auctioneer.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="main-nav">
+    <a href="index.html" class="brand-section">
+      <div class="brand-icon">NNSL</div>
+      <div class="brand-text">
+        <span class="brand-title">NNSL Auction Arena</span>
+        <span class="brand-badge">Podium Console</span>
+      </div>
+    </a>
+
+    <button class="nav-mobile-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="dashboard.html" data-page="dashboard"><i data-lucide="layout-dashboard"></i> Dashboard</a></li>
+      <li class="nav-item"><a href="live.html" data-page="live" target="_blank"><i data-lucide="tv"></i> Live Screen <span class="nav-live-badge">TV</span></a></li>
+      <li class="nav-item"><a href="auctioneer.html" data-page="auctioneer" class="active"><i data-lucide="gavel"></i> Auctioneer</a></li>
+      <li class="nav-item"><a href="players.html" data-page="players"><i data-lucide="users"></i> Players</a></li>
+      <li class="nav-item"><a href="teams.html" data-page="teams"><i data-lucide="shield"></i> Teams</a></li>
+      <li class="nav-item"><a href="results.html" data-page="results"><i data-lucide="trophy"></i> Results</a></li>
+      <li class="nav-item"><a href="settings.html" data-page="settings"><i data-lucide="settings"></i> Settings</a></li>
+    </ul>
+
+    <div class="nav-user">
+      <a href="live.html" target="_blank" class="btn btn-outline btn-sm">
+        <i data-lucide="tv"></i> Launch Live Arena TV
+      </a>
+    </div>
+  </nav>
+
+  <div class="auctioneer-container">
+
+    <!-- Status Header Bar -->
+    <header class="auctioneer-top-bar">
+      <div class="auctioneer-identity">
+        <h1 style="font-family: var(--font-display); font-size: 1.35rem; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="gavel" style="color: var(--accent-gold);"></i> Podium Console
+        </h1>
+        <div id="auctioneer-sync-status" class="sync-status">
+          <span class="sync-dot"></span> Live Sync
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.6rem; align-items: center;">
+        <a href="players.html" class="btn btn-secondary btn-sm">
+          <i data-lucide="upload"></i> Upload Players CSV
+        </a>
+        <a href="live.html" target="_blank" class="btn btn-primary btn-sm">
+          <i data-lucide="tv"></i> Open Live Arena TV
+        </a>
+      </div>
+    </header>
+
+    <!-- Master Live Monitor Box -->
+    <section class="auctioneer-monitor">
+      
+      <!-- Player Pod -->
+      <div class="monitor-player-cell">
+        <div id="console-player-badge" style="width: 85px; height: 100px; border-radius: var(--radius-md); background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.25) 0%, rgba(10, 14, 25, 0.95) 100%); border: 2px solid var(--border-medium); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <span id="console-pos-badge" style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: #fff; line-height: 1;">--</span>
+          <span id="console-id-badge" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-cyan); margin-top: 4px;">ID</span>
+        </div>
+        <div class="monitor-player-info">
+          <h2 id="console-player-name">No Player Selected</h2>
+          <div id="console-player-meta" class="monitor-pos-id">
+            <span style="color: var(--text-muted);">Choose a player from queue below</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Bid & Leading Team -->
+      <div class="monitor-bid-cell">
+        <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.1em;">Highest Live Bid</span>
+        <div id="console-current-bid" class="monitor-bid-val">$0</div>
+        <div id="console-leader-row" class="monitor-leader-row">
+          <span>Leading Team:</span>
+          <strong class="monitor-leader-name" style="color: var(--accent-gold);">None</strong>
+        </div>
+      </div>
+
+      <!-- Timer & Controls -->
+      <div class="monitor-timer-cell">
+        <div id="console-timer-val" class="monitor-timer-box">30</div>
+        <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-top: 0.25rem;">SECONDS</div>
+      </div>
+
+    </section>
+
+    <!-- Timer Control Strip -->
+    <div class="timer-control-strip">
+      <button id="btn-play-pause" class="btn btn-primary timer-btn">
+        <i data-lucide="play"></i> Start / Resume
+      </button>
+      <button id="btn-reset-timer" class="btn btn-secondary timer-btn">
+        <i data-lucide="rotate-ccw"></i> Reset Timer
+      </button>
+      <button id="btn-next-player" class="btn btn-outline timer-btn">
+        <i data-lucide="skip-forward"></i> Next Player in Queue
+      </button>
+      <button id="btn-open-spin-wheel" class="btn btn-warning timer-btn" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #000; font-weight: 800; border: none; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);">
+        <i data-lucide="sparkles"></i> Spin Wheel (Random Pick)
+      </button>
+    </div>
+
+    <!-- Rapid Bidding Deck -->
+    <section class="bidding-deck">
+      
+      <!-- Step 1: Team Selector -->
+      <div>
+        <div class="deck-section-title">
+          <span><i data-lucide="shield"></i> 1. Select Bidding Club</span>
+          <span style="font-size: 0.75rem; color: var(--accent-gold);">TAP TO SELECT</span>
+        </div>
+        <div class="teams-picker-grid" id="team-picker-grid" style="margin-top: 0.75rem;">
+          <!-- Team buttons generated via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Step 2: Bid Increment Presets -->
+      <div>
+        <div class="deck-section-title">
+          <span><i data-lucide="trending-up"></i> 2. Choose Bid Increment</span>
+          <span style="font-size: 0.75rem; color: var(--text-secondary);">OR ENTER CUSTOM AMOUNT</span>
+        </div>
+        
+        <div class="increments-grid" style="margin-top: 0.75rem;">
+          <button type="button" class="increment-btn" data-value="2000000">+₹20 L</button>
+          <button type="button" class="increment-btn active" data-value="5000000">+₹50 L</button>
+          <button type="button" class="increment-btn" data-value="10000000">+₹1 Cr</button>
+          <button type="button" class="increment-btn" data-value="20000000">+₹2 Cr</button>
+        </div>
+
+        <div style="margin-top: 0.75rem;">
+          <input type="number" id="custom-bid-input" class="form-control" placeholder="Or enter exact custom bid in INR (e.g. 25000000 for ₹2.5 Cr)..." step="500000" />
+        </div>
+      </div>
+
+      <!-- Step 3: Big Touchpad Action -->
+      <div class="action-pad-grid">
+        <button id="btn-register-bid" class="btn-bid-submit" disabled>
+          <span id="proposed-bid-label">Submit Bid</span>
+        </button>
+
+        <button id="btn-undo-bid" class="btn-undo-bid" disabled title="Undo last placed bid">
+          <i data-lucide="undo"></i> Undo Last Bid
+        </button>
+      </div>
+
+      <!-- Step 4: Decision Bar (SOLD / UNSOLD) -->
+      <div>
+        <div class="deck-section-title" style="margin-bottom: 0.75rem;">
+          <span><i data-lucide="check-circle-2"></i> 3. Finalize Stage Decision</span>
+          <span style="font-size: 0.75rem; color: var(--accent-crimson);">REQUIRES CONFIRMATION</span>
+        </div>
+
+        <div class="decision-bar">
+          <button id="btn-confirm-sold" class="btn-sold-action" disabled>
+            <i data-lucide="check"></i> Confirm SOLD
+          </button>
+          <button id="btn-mark-unsold" class="btn-unsold-action" disabled>
+            <i data-lucide="x"></i> Mark UNSOLD
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Player Navigation Dock -->
+    <footer class="player-nav-dock">
+      <div class="player-search-select">
+        <select id="select-player-dropdown" class="form-control">
+          <!-- Populated dynamically with available and unsold players -->
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <button id="btn-reopen-unsold" class="btn btn-secondary btn-sm">
+          <i data-lucide="rotate-ccw"></i> Reopen Selected Unsold Player
+        </button>
+        <a href="players.html" class="btn btn-outline btn-sm">
+          <i data-lucide="users"></i> Manage Players
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Spin Wheel Modal for Random Player Selection -->
+  <div id="spin-wheel-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-box wheel-modal-box">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <i data-lucide="sparkles" style="color: var(--accent-gold); width: 24px; height: 24px;"></i>
+          <div>
+            <h3 class="modal-title" style="margin: 0; font-family: var(--font-display); font-size: 1.35rem; color: #fff; letter-spacing: 0.04em;">NNSL Player Spin Wheel</h3>
+            <p style="margin: 0; font-size: 0.8rem; color: var(--text-muted);">Spin to randomly draw an available player to the podium</p>
+          </div>
+        </div>
+        <button type="button" class="modal-close" id="btn-close-spin-wheel">&times;</button>
+      </div>
+      
+      <div class="modal-body wheel-modal-body">
+        
+        <!-- Wheel Container with Top Pointer -->
+        <div class="wheel-stage-container">
+          <div class="wheel-pointer-arrow">
+            <svg width="38" height="42" viewBox="0 0 38 42">
+              <path d="M19 42 L3 8 C1 4 4 0 9 0 L29 0 C34 0 37 4 35 8 Z" fill="#f59e0b" stroke="#ffffff" stroke-width="2.5" />
+            </svg>
+          </div>
+
+          <!-- Canvas Wheel -->
+          <canvas id="spin-wheel-canvas" width="460" height="460"></canvas>
+
+          <!-- Center Hub Spin Trigger Button -->
+          <button id="btn-trigger-spin" class="wheel-center-hub" type="button" title="Click to spin!">
+            <span>SPIN</span>
+          </button>
+        </div>
+
+        <!-- Wheel Selected Winner Announcement Bar -->
+        <div id="wheel-winner-announcement" class="wheel-winner-bar" style="display: none;">
+          <div style="font-size: 0.8rem; font-weight: 800; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.1em;">
+            Selected Player
+          </div>
+          <div id="wheel-winner-name" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: #fff; text-transform: uppercase;">
+            Player Name
+          </div>
+          <div id="wheel-winner-details" style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.2rem;">
+            Position • Base Price
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.75rem; justify-content: center;">
+            <button id="btn-load-wheel-player" class="btn btn-primary" type="button">
+              <i data-lucide="check"></i> Load Player to Podium Stage
+            </button>
+            <button id="btn-spin-again" class="btn btn-secondary" type="button">
+              <i data-lucide="rotate-ccw"></i> Spin Again
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initAuctioneerPage } from './js/pages/auctioneer.js';
+    import { setupNavigation, refreshLucideIcons } from './js/ui.js';
+    document.addEventListener('DOMContentLoaded', () => {
+      setupNavigation('auctioneer');
+      initAuctioneerPage();
+      refreshLucideIcons();
+    });
+  </script>
+</body>
+</html>

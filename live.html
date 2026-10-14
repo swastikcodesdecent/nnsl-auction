@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NNSL 2026 - Live Players Auction Arena</title>
+  <meta name="description" content="Official televised sports broadcast player auction live arena screen for NNSL 2026.">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/live.css">
+
+  <!-- Lucide Icons Library -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="live-auction-body">
+
+  <!-- Top TV Broadcast Header -->
+  <header class="tv-broadcast-header">
+    
+    <!-- Left League Badge & Broadcast Status -->
+    <div class="tv-header-left">
+      <div class="league-badge-box">
+        <div class="league-badge-text-sub">OFFICIAL</div>
+        <div class="league-badge-text-main" id="broadcast-league-name">NNSL</div>
+        <div class="league-badge-text-year" id="broadcast-league-year">2026</div>
+      </div>
+      
+      <div class="tv-live-indicator-pill">
+        <span class="live-beacon-dot"></span>
+        <span class="live-beacon-text">LIVE BROADCAST</span>
+        <span class="live-beacon-quality">4K UHD</span>
+      </div>
+    </div>
+
+    <!-- Center Show Title Banner: NNSL 2026 - PLAYERS AUCTION -->
+    <div class="tv-center-title-group">
+      <div class="tv-league-subtitle" id="tv-tournament-subtitle">NNSL 2026</div>
+      <div class="tv-auction-title-box">
+        <span class="tv-tag-players"><i data-lucide="zap" class="title-lucide"></i> PLAYERS</span>
+        <span class="tv-text-auction">AUCTION ARENA</span>
+      </div>
+      <div class="tv-pool-tag" id="tv-pool-tag">
+        <i data-lucide="sparkles"></i> <span>CHAMPIONSHIP SQUAD FORMATION</span>
+      </div>
+    </div>
+
+    <!-- Right Controls & Timer -->
+    <div class="tv-header-right">
+      <!-- Digital Holographic Stadium Timer -->
+      <div class="tv-timer-pill" id="tv-timer-pill" title="Countdown Timer">
+        <div class="tv-timer-icon-wrap">
+          <i data-lucide="clock" class="tv-timer-icon"></i>
+        </div>
+        <div class="tv-timer-numbers">
+          <span class="tv-timer-digit" id="tv-timer-digit">30</span>
+          <span class="tv-timer-label">SEC</span>
+        </div>
+      </div>
+
+      <div class="tv-controls-group">
+        <button class="icon-btn tv-icon-btn" id="btn-sound-toggle" title="Toggle Broadcast Audio">
+          <i data-lucide="volume-2"></i>
+        </button>
+        <button class="icon-btn tv-icon-btn" id="btn-fullscreen-toggle" title="Toggle Fullscreen">
+          <i data-lucide="maximize"></i>
+        </button>
+        <a href="auctioneer.html" class="btn btn-secondary btn-sm tv-console-btn" id="btn-nav-auctioneer">
+          <i data-lucide="terminal"></i> Console
+        </a>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- Main TV Arena Stage -->
+  <main class="tv-main-stage">
+    
+    <!-- Left Wing: Player Spotlight Card & Holographic Halo -->
+    <section class="tv-player-cluster">
+      
+      <!-- Stage Pod with Glow Border -->
+      <div class="tv-player-card-stage">
+        
+        <!-- Corner Targeting Tech Reticles -->
+        <div class="tech-corner tl"></div>
+        <div class="tech-corner tr"></div>
+        <div class="tech-corner bl"></div>
+        <div class="tech-corner br"></div>
+
+        <!-- Avatar Stage Section -->
+        <div class="tv-avatar-column">
+          <div class="tv-avatar-circle" id="tv-player-avatar-wrap">
+            <!-- Lot Number Badge -->
+            <div class="tv-lot-pill" id="tv-player-lot" title="Player Lot Number">
+              <span class="lot-prefix">#</span><span class="lot-num">-</span>
+            </div>
+            
+            <!-- Player Image or Dynamic Athletic Silhouette Vector -->
+            <div class="tv-photo-container" id="tv-photo-container">
+              <svg class="tv-silhouette-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="52" r="28" fill="#fed7aa" />
+                <path d="M90 74 H110 V92 H90 Z" fill="#fed7aa" />
+                <path d="M72 48 C72 30, 85 22, 100 22 C115 22, 128 30, 128 48 C128 52, 126 58, 124 60 C120 46, 110 38, 100 38 C90 38, 80 46, 76 60 Z" fill="#0f172a" />
+                <path d="M42 195 C42 125, 62 105, 86 92 L92 110 L108 110 L114 92 C138 105, 158 125, 158 195 Z" fill="#1e3a8a" />
+                <path d="M86 92 L100 118 L114 92 L108 88 L100 102 L92 88 Z" fill="#f59e0b" />
+                <path d="M70 100 C62 115, 52 145, 42 195 L58 195 C66 155, 75 130, 80 115 Z" fill="#0284c7" />
+                <path d="M130 100 C138 115, 148 145, 158 195 L142 195 C134 155, 125 130, 120 115 Z" fill="#0284c7" />
+                <circle cx="126" cy="138" r="8" fill="#ffffff" stroke="#f59e0b" stroke-width="2" />
+                <text x="74" y="142" font-family="'Outfit', sans-serif" font-size="9" font-weight="900" fill="#f59e0b">NNSL</text>
+              </svg>
+            </div>
+
+            <!-- Stage Spotlight Floor Reflection -->
+            <div class="tv-avatar-spotlight"></div>
+          </div>
+
+          <!-- Age and Origin Badge -->
+          <div class="tv-age-badge" id="tv-player-age">
+            <i data-lucide="activity"></i> <span>STANDBY</span>
+          </div>
+        </div>
+
+        <!-- Player Details Capsules Stack -->
+        <div class="tv-pills-stack">
+          
+          <!-- Status Banner Pill -->
+          <div class="tv-status-ribbon" id="tv-player-status-badge">
+            <span class="pulse-dot"></span>
+            <span id="tv-stage-status-text">AWAITING PODIUM CALL</span>
+          </div>
+
+          <!-- Pill 1: Player Name -->
+          <div class="tv-capsule-pill tv-pill-name">
+            <div class="tv-player-name-text" id="tv-player-name">WAITING FOR NEXT PLAYER</div>
+          </div>
+
+          <!-- Pill 2: Main Role & Position -->
+          <div class="tv-capsule-pill tv-pill-role">
+            <i data-lucide="shield" class="pill-lucide"></i>
+            <div class="tv-player-role-text" id="tv-player-role">PODIUM VACANT</div>
+          </div>
+
+          <!-- Pill 3: Club & Nationality Subrole -->
+          <div class="tv-capsule-pill tv-pill-subrole">
+            <i data-lucide="globe" class="pill-lucide"></i>
+            <div class="tv-player-subrole-text" id="tv-player-subrole">Call player from auctioneer room</div>
+          </div>
+
+          <!-- Pill 4: Base Price Badge with Gold Aura -->
+          <div class="tv-capsule-pill tv-pill-base">
+            <i data-lucide="tag" class="pill-lucide gold"></i>
+            <span class="tv-base-label">BASE PRICE:</span>
+            <span class="tv-base-val" id="tv-player-base">₹ 0</span>
+          </div>
+
+          <!-- Mini Performance / Stats Matrix Bar -->
+          <div class="tv-stats-matrix" id="tv-player-stats-matrix">
+            <div class="stat-cell">
+              <span class="stat-lbl"><i data-lucide="award"></i> GRADE</span>
+              <span class="stat-val" id="stat-category">MARQUEE</span>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-lbl"><i data-lucide="user-check"></i> STATUS</span>
+              <span class="stat-val" id="stat-status">AVAILABLE</span>
+            </div>
+            <div class="stat-cell">
+              <span class="stat-lbl"><i data-lucide="flame"></i> DEMAND</span>
+              <span class="stat-val" id="stat-demand">HIGH</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Right Wing: Live Bidding Hub & Leading Franchise Duel -->
+    <section class="tv-bidding-cluster">
+      
+      <!-- Bidding Stage Header Banner -->
+      <div class="tv-bid-header-bar">
+        <div class="tv-bid-radar-pill" id="tv-bid-radar">
+          <span class="radar-ping"></span>
+          <i data-lucide="trending-up"></i>
+          <span id="tv-bid-stage-label">CURRENT HIGHEST BID</span>
+        </div>
+        <div class="tv-bid-tag-notice" id="tv-bid-increment-tag">+ ₹ 50 LAKH JUMP</div>
+      </div>
+
+      <!-- Giant Bright Electric Green Bid Amount Display -->
+      <div class="tv-bid-display-container">
+        <div class="tv-bid-amount-display" id="tv-bid-amount">₹ 0</div>
+        <div class="tv-bid-compact-amount" id="tv-bid-compact">Awaiting First Bid</div>
+      </div>
+
+      <!-- Leading Franchise Showcase Card -->
+      <div class="tv-team-badge-box">
+        
+        <div class="team-showcase-header">
+          <span class="team-showcase-tag"><i data-lucide="crown"></i> CURRENT LEADER</span>
+          <span class="team-showcase-dot" id="tv-team-dot"></span>
+        </div>
+
+        <div class="team-crest-identity-row">
+          <!-- Team Crest Emblem -->
+          <div class="tv-team-crest" id="tv-team-crest">
+            <span class="tv-team-crest-letter" id="tv-crest-letter">-</span>
+          </div>
+
+          <div class="team-identity-info">
+            <div class="team-status-sub">ACQUIRING CLUB</div>
+            <div class="tv-leading-team-name" id="tv-leading-team-name">NO BID YET</div>
+          </div>
+        </div>
+
+        <!-- Stacked Metrics: Purse Remaining & Squad Meter -->
+        <div class="tv-team-metrics-stack">
+          
+          <!-- Metric 1: Remaining Purse Bar -->
+          <div class="tv-metric-bar purse-bar">
+            <div class="tv-metric-top">
+              <span class="tv-metric-bar-lbl"><i data-lucide="wallet"></i> PURSE REMAINING</span>
+              <span class="tv-metric-bar-val" id="tv-team-max-bid">₹ --</span>
+            </div>
+            <div class="tv-purse-track">
+              <div class="tv-purse-fill" id="tv-team-purse-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Metric 2: Squad Slots Tracker -->
+          <div class="tv-metric-bar squad-bar">
+            <div class="tv-metric-top">
+              <span class="tv-metric-bar-lbl"><i data-lucide="users"></i> SQUAD ROSTER</span>
+              <span class="tv-metric-bar-val" id="tv-team-squad-count">0 / 8 PL</span>
+            </div>
+            <!-- Visual Squad Slot Dots (Strict 8 squad slots) -->
+            <div class="tv-squad-dots" id="tv-squad-dots">
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+              <span class="squad-slot-dot"></span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Live Bidding Battle Stream (Recent Bids War Room) -->
+      <div class="tv-bid-history-feed">
+        <div class="feed-header">
+          <i data-lucide="activity"></i>
+          <span>LIVE BID DUEL STREAM</span>
+        </div>
+        <div class="feed-list" id="tv-bid-history-list">
+          <div class="feed-item placeholder">Awaiting franchise bids on podium...</div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Animated Ribbon of Teams & Remaining Purses (IPL / Premier League ticker style) -->
+  <div class="tv-ribbon-container">
+    <div class="tv-ribbon-tag">
+      <i data-lucide="shield"></i> <span>FRANCHISE PURSES</span>
+    </div>
+    <div class="tv-ribbon-track" id="tv-ribbon-track">
+      <!-- Injected via JavaScript with balances and X / 8 squad counters -->
+    </div>
+  </div>
+
+  <!-- Bottom Broadcast Bar: Watermark & Navigation -->
+  <footer class="tv-bottom-bar">
+    
+    <div class="tv-watermark-pill">
+      <i data-lucide="trophy" class="watermark-icon"></i>
+      <span>NNSL 2026 OFFICIAL LIVE ARENA BROADCAST</span>
+    </div>
+
+    <div class="tv-bottom-links">
+      <a href="auctioneer.html" class="btn btn-outline btn-sm">
+        <i data-lucide="gavel"></i> Auctioneer Console
+      </a>
+      <a href="dashboard.html" class="btn btn-outline btn-sm">
+        <i data-lucide="layout-dashboard"></i> Dashboard
+      </a>
+      <a href="players.html" class="btn btn-outline btn-sm">
+        <i data-lucide="users"></i> Players Roster
+      </a>
+      <a href="results.html" class="btn btn-outline btn-sm">
+        <i data-lucide="trophy"></i> Results
+      </a>
+    </div>
+
+  </footer>
+
+  <!-- Fullscreen Celebration Overlay (SOLD / UNSOLD) -->
+  <div class="overlay-announcement" id="broadcast-overlay">
+    <canvas class="confetti-canvas" id="confetti-canvas"></canvas>
+    <div class="celebration-box sold-theme" id="broadcast-overlay-box">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Module Script Execution -->
+  <script type="module">
+    import { initLivePage } from './js/pages/live.js';
+    document.addEventListener('DOMContentLoaded', initLivePage);
+  </script>
+</body>
+</html>
